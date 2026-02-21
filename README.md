@@ -1,4 +1,4 @@
-# GradeCalc - Super Student Tool
+# GradeCalc - Super Student
 
 Простий та зручний калькулятор для розрахунку середнього балу студента.
 
