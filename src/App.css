@@ -44,6 +44,7 @@ button {
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
+  color: #333;
 }
 
 .subject-list {
@@ -60,4 +61,5 @@ button {
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 4px;
+  color: #333;
 }
