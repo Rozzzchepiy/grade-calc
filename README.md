@@ -1,4 +1,4 @@
-# GradeCalc - Student GPA Calculator
+# GradeCalc - тест 
 
 Простий та зручний калькулятор для розрахунку середнього балу студента.
 
