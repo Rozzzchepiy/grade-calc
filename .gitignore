@@ -13,6 +13,9 @@ dist
 .DS_Store
 *.local
 
+dist-ssr
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

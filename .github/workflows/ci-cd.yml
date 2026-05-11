@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+# Коли запускати цей пайплайн?
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+# Що саме робити?
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest # Віртуальна машина на Linux
+
+    steps:
+      # 1. Завантажуємо твій код на віртуальну машину
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Встановлюємо Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Використовуємо стабільну 20-ту версію
+
+      # 3. Встановлюємо всі залежності (бібліотеки)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Запускаємо перевірку коду на чистоту (Лінтер)
+      - name: Run linter
+        run: npm run lint
+
+      # 5. Запускаємо твої тести (Vitest, які ти писав у 2 лабі)
+      - name: Run unit tests
+        run: npm run test:unit
+
+      # 6. Пробуємо зібрати проєкт (щоб переконатися, що він не зламається при деплої)
+      - name: Build for production
+        run: npm run build
