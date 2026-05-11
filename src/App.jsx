@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import posthog from 'posthog-js';
 
 function App() {
   // Зчитуємо змінну оточення (Крок 2)
@@ -66,11 +67,17 @@ function App() {
     const newSubject = { id: Date.now().toString(), name, grade: g, credits: c };
     updateActiveProfile({ subjects: [...subjects, newSubject] });
 
+    posthog.capture('subject_added', {
+    subject_name: name,
+    credits: c
+    });
+
     setName(''); setGrade(''); setCredits('');
   };
 
   const handleDeleteSubject = (id) => {
     updateActiveProfile({ subjects: subjects.filter(sub => sub.id !== id) });
+    posthog.capture('subject_deleted');
   };
 
   const handleAddProfile = () => {
@@ -121,7 +128,10 @@ function App() {
               <option key={p.id} value={p.id}>{p.name}</option>
             ))}
           </select>
-          <button onClick={handleAddProfile} className="btn secondary-btn">+ Новий</button>
+            {/* Кнопка з'явиться ТІЛЬКИ якщо прапорець увімкнено в адмінці */}
+            {posthog.isFeatureEnabled('show-new-profile-btn') && (
+              <button onClick={handleAddProfile} className="btn secondary-btn">+ Новий</button>
+            )}
           {profiles.length > 1 && (
             <button onClick={handleDeleteProfile} className="btn delete-profile-btn">🗑️</button>
           )}
