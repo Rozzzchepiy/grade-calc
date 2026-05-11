@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  // Ініціалізація профілів з LocalStorage (щоб дані зберігалися після оновлення)
+  // Зчитуємо змінну оточення (Крок 2)
+  const appStatus = import.meta.env.VITE_APP_STATUS;
+
+  // Ініціалізація профілів з LocalStorage
   const [profiles, setProfiles] = useState(() => {
     const saved = localStorage.getItem('gradecalc_profiles');
     if (saved) return JSON.parse(saved);
-    // Дефолтний профіль, якщо людина зайшла вперше
     return [{ id: 'default', name: 'Мій профіль', subjects: [], extraPoints: 0 }];
   });
 
@@ -56,7 +58,6 @@ function App() {
     const g = parseFloat(grade);
     const c = parseFloat(credits);
 
-    // Валідації
     if (!name || isNaN(g) || isNaN(c)) return alert('Будь ласка, заповніть всі поля коректно.');
     if (g < 0 || g > 100) return alert('Оцінка за предмет не може бути більшою за 100 або меншою за 0.');
     if (c <= 0) return alert('Кількість кредитів має бути більшою за 0.');
@@ -65,7 +66,6 @@ function App() {
     const newSubject = { id: Date.now().toString(), name, grade: g, credits: c };
     updateActiveProfile({ subjects: [...subjects, newSubject] });
 
-    // Очищуємо форму
     setName(''); setGrade(''); setCredits('');
   };
 
@@ -74,7 +74,7 @@ function App() {
   };
 
   const handleAddProfile = () => {
-    const profileName = prompt('Введіть ім\'я для нового розрахунку (наприклад, ім\'я друга):');
+    const profileName = prompt('Введіть ім\'я для нового розрахунку:');
     if (!profileName) return;
     const newProfile = { id: Date.now().toString(), name: profileName, subjects: [], extraPoints: 0 };
     setProfiles([...profiles, newProfile]);
@@ -93,7 +93,22 @@ function App() {
   return (
     <div className="container">
       <div className="header-section">
-        <h1>GradeCalc 🎓</h1>
+        <h1>
+          GradeCalc 🎓
+          {/* Виведення змінної оточення в інтерфейс */}
+          <span style={{ 
+            fontSize: '12px', 
+            background: '#e0e0e0', 
+            color: '#333',
+            padding: '4px 8px', 
+            borderRadius: '6px', 
+            marginLeft: '15px',
+            verticalAlign: 'middle',
+            fontWeight: 'normal'
+          }}>
+            {appStatus}
+          </span>
+        </h1>
         
         {/* Управління профілями */}
         <div className="profile-controls">

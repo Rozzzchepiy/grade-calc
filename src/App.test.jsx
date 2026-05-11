@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { beforeEach, describe, it, expect, vi } from 'vitest';
+// eslint-disable-next-line no-unused-vars
 import App from './App';
 
 describe('GradeCalc Unit Tests', () => {
