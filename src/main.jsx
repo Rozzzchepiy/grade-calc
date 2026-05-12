@@ -34,8 +34,7 @@ Sentry.setUser({
 
 // Ініціалізація PostHog (з реверс-проксі для Vercel)
 posthog.init(POSTHOG_KEY, {
-    api_host: isProduction ? '/ingest' : 'https://eu.i.posthog.com',
-    ui_host: 'https://eu.posthog.com',
+    api_host: 'https://eu.i.posthog.com',
     person_profiles: 'always' 
 });
 
