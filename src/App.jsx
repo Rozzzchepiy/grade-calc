@@ -6,7 +6,7 @@ function App() {
   // Зчитуємо змінну оточення (Крок 2)
   const appStatus = import.meta.env.VITE_APP_STATUS;
 
-  // Ініціалізація профілів з LocalStorage
+  // Ініціалізація профілів з LocalStorageч
   const [profiles, setProfiles] = useState(() => {
     const saved = localStorage.getItem('gradecalc_profiles');
     if (saved) return JSON.parse(saved);
