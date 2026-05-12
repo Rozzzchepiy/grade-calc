@@ -13,6 +13,10 @@ function App() {
     return [{ id: 'default', name: 'Мій профіль', subjects: [], extraPoints: 0 }];
   });
 
+
+
+  // fff
+
   // Стан для активного профілю
   const [activeProfileId, setActiveProfileId] = useState(() => {
     return localStorage.getItem('gradecalc_active_profile') || 'default';
