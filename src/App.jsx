@@ -191,6 +191,18 @@ function App() {
         ))}
         {subjects.length === 0 && <p className="empty-text">Додайте свій перший предмет!</p>}
       </ul>
+        <div style={{ marginTop: '30px', borderTop: '1px solid #ccc', paddingTop: '20px' }}>
+        <button 
+          onClick={() => {
+            throw new Error("Sentry Test Error: GradeCalc crashed!");
+          }} 
+          style={{ background: 'red', color: 'white', padding: '10px' }}
+        >
+          💥 Зламати додаток (Test Sentry)
+        </button>
+      </div>
+
+
     </div>
   );
 }
