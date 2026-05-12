@@ -39,6 +39,8 @@ posthog.init(POSTHOG_KEY, {
     person_profiles: 'always' 
 });
 
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
